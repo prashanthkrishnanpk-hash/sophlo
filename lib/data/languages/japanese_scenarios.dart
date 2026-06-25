@@ -1,7 +1,7 @@
 // lib/data/languages/japanese_scenarios.dart
 import '../../models/models.dart';
 
-final List<Scenario> japaneseMission1Scenarios = [
+const List<Scenario> japaneseMission1Scenarios = [
   Scenario(
     scenarioId: "JA_001",
     missionId: 1,
@@ -12,7 +12,6 @@ final List<Scenario> japaneseMission1Scenarios = [
     sophiePhoneticHint: "ko-ni-chi-wa / yo-ro-shi-ku o-ne-gai-shi-ma-su",
     targetLanguageAnchor: "こんにちは、よろしくお願いします",
     slotOptions: ["こんにちは", "おはようございます", "こんばんは"],
-    npcAudioResponseTransscript: "いらっしゃいませ！お席にご案内します。",
     npcAudioResponseTranscript: "いらっしゃいませ！お席にご案内します。",
     graffitiStyleTag: "Pink neon '挨拶' kanji stamp — brushstroke style",
     npcName: "Yuki",

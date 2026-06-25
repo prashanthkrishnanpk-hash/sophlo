@@ -109,8 +109,8 @@ class PatternMasteryWidget extends StatelessWidget {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: List.generate(hindiPatterns.length, (index) {
-        final pattern = hindiPatterns[index];
+      children: List.generate(universalPatterns.length, (index) {
+        final pattern = universalPatterns[index];
         final mastery = records[index];
         final color = _masteryColor(mastery.masteryLabel, accentColor);
 

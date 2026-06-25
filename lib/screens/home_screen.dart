@@ -422,7 +422,7 @@ class HomeScreen extends StatelessWidget {
             else if (isCurrent)
               Icon(Icons.arrow_forward_ios, color: accentColor, size: 16)
             else
-              const Icon(Icons.lock_outline, color: Colors.white20, size: 16),
+              Icon(Icons.lock_outline, color: Colors.white.withOpacity(0.2), size: 16),
           ],
         ),
       ),

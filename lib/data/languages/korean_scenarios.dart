@@ -1,7 +1,7 @@
 // lib/data/languages/korean_scenarios.dart
-import '../models/models.dart';
+import '../../models/models.dart';
 
-final List<Scenario> koreanMission1Scenarios = [
+const List<Scenario> koreanMission1Scenarios = [
   Scenario(
     scenarioId: "KO_001",
     missionId: 1,

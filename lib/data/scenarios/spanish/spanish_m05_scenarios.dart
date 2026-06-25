@@ -136,7 +136,7 @@ const List<Scenario> spanishM05Scenarios = [
     slotOptions: ["pan", "agua", "aceite", "servilletas"],
     npcAudioResponseTranscript:
         "¡Claro que sí! Enseguida.",
-    graffetiStyleTag: "Wheat 'PAN +1' request tag — restaurant linen",
+    graffitiStyleTag: "Wheat 'PAN +1' request tag — restaurant linen",
     npcName: "Camarera",
     npcAvatarEmoji: "👩‍🍳",
   ),

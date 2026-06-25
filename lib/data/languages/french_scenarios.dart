@@ -1,7 +1,7 @@
 // lib/data/languages/french_scenarios.dart
 import '../../models/models.dart';
 
-final List<Scenario> frenchMission1Scenarios = [
+const List<Scenario> frenchMission1Scenarios = [
   Scenario(
     scenarioId: "FR_001",
     missionId: 1,
