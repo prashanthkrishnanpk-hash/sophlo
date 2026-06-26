@@ -1,6 +1,8 @@
 // lib/main.dart
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'providers/user_progress_provider.dart';
 import 'theme/sophlo_theme.dart';
@@ -8,15 +10,97 @@ import 'screens/onboarding_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-    ),
-  );
-  runApp(const SophloApp());
+  // Catch ANY error anywhere in the app and show it on screen
+  // instead of silently crashing. This is temporary — for debugging
+  // the first real build. Remove once the app is stable.
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return Material(
+      color: Colors.black,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '🐛 SOPHLO CRASHED — ERROR DETAILS:',
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  details.exceptionAsString(),
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  details.stack?.toString() ?? 'No stack trace available',
+                  style: const TextStyle(color: Colors.grey, fontSize: 11),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  };
+
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
+    runApp(const SophloApp());
+  }, (error, stackTrace) {
+    // Catches errors that happen outside the widget tree
+    // (e.g. during startup, before any screen is shown)
+    runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Material(
+          color: Colors.black,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      '🐛 SOPHLO CRASHED ON STARTUP:',
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      error.toString(),
+                      style: const TextStyle(
+                          color: Colors.white, fontSize: 14),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      stackTrace.toString(),
+                      style:
+                          const TextStyle(color: Colors.grey, fontSize: 11),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  });
 }
 
 class SophloApp extends StatelessWidget {
@@ -69,7 +153,6 @@ class _SplashScreen extends StatelessWidget {
             Text(
               'SOPHLO',
               style: TextStyle(
-                fontFamily: 'Barlow',
                 fontSize: 52,
                 fontWeight: FontWeight.w900,
                 color: SophloTheme.neonGreen,
