@@ -26,10 +26,6 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   confetti: ^0.7.0
 
-  # Audio
-  just_audio: ^0.9.36
-  audioplayers: ^5.2.1
-
   # Utilities
   intl: ^0.19.0
 
